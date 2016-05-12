@@ -27,8 +27,8 @@ var config = {
 
 var scripts = [
   './src/angular/main.js',
-  './src/angular/directive/toast.js',
-  './src/angular/service/toast.js'
+  './src/angular/directive/tab.js',
+  './src/angular/directive/tabs.js'
 ];
 
 

@@ -1,3 +1,22 @@
+/* eslint no-unused-vars:0 */
+angular.module('tabs', []),
+  extend = angular.extend,
+  forEach = angular.forEach,
+  jqLite = angular.element,
+  noop = angular.noop;
+
+angular.module('tabs')
+  .directive('nxTab', [function () {
+    return {
+      restrict: 'E',
+      transclude: true,
+      template: '<div class="ng-widget-tab" data-active="{{active}}" ng-transclude></div>',
+      scope: {
+        active: '='
+      }
+    };
+  }]);
+
 angular.module('tabs')
   .directive('nxTabs', [function () {
     return {

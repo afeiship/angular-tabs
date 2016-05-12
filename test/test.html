@@ -11,22 +11,45 @@
       font-family: 'STHeiti', 'Microsoft YaHei', Helvetica, Arial, sans-serif;
       -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
     }
+
+    [data-active] {
+      cursor: pointer;
+    }
+
+    [data-active=true] {
+      color: #f00;
+    }
   </style>
 </head>
 <body ng-controller="MainCtrl">
 <button style="width:100%;background: #eee;padding:20px;" ng-click="show()">Show Toast</button>
 
+<nx-tabs items="items" item-template="itemTemplate()">
+</nx-tabs>
+
 <script type="text/javascript" src="../bower_components/angular/angular.js"></script>
 <script type="text/javascript" src="../dist/js/angular-tabs.js"></script>
 <script type="text/javascript">
-  var TestModule = angular.module('TestApp', ['toast'])
-    .controller('MainCtrl', function ($scope, ngToast) {
-      $scope.show = function () {
-        ngToast.show({
-          cssClass:'customizeClass',
-          msg: '<b>v</b>asfdjsldafj<em style="color:#f00;">I am safed</em>!'
-        });
+  var TestModule = angular.module('TestApp', ['tabs'])
+    .controller('MainCtrl', function ($scope,$compile) {
+      $scope.itemTemplate = function () {
+        var templateElement = angular.element('<div>{{item.title}}</div>');
+        return $compile(templateElement)($scope);
       };
+      $scope.items = [
+        {
+          title: 'Tab1',
+          active: true
+        },
+        {
+          title: 'Tab2',
+          active: false
+        },
+        {
+          title: 'Tab3',
+          active: false
+        }
+      ];
     });
 </script>
 </body>
