@@ -1,6 +1,6 @@
 {
   "name": "angular-tabs",
-  "description": "Tabs component based on angular &amp; sass.",
+  "description": "Tabs directive based on angular & sass.",
   "main": "dist/angular-tabs.js",
   "authors": [
     "afei"
