@@ -6,25 +6,10 @@ angular.module('tabs', []),
   noop = angular.noop;
 
 angular.module('tabs')
-  .controller('TabController', ['$scope', function ($scope) {
-
-    $scope.select = select;
-
-    function select(inItem) {
-      angular.forEach($scope.items, function (item, key) {
-        item.active = false;
-      });
-      inItem.active = true;
-    }
-
-  }]);
-
-angular.module('tabs')
   .directive('nxTab', [function () {
     return {
       restrict: 'E',
       transclude: true,
-      //require: '?^TabController',
       template: '<div class="ng-widget-tab" data-active="{{item.active}}" ng-transclude></div>',
       link: linkFn
     };

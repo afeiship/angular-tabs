@@ -1,50 +1,56 @@
-angular.module('tabs')
-  .directive('nxTabs', [function ($scope) {
-    return {
-      restrict: 'E',
-      transclude: true,
-      template: '<div class="ng-widget-tabs {{cssClass}}" ng-transclude></div>',
-      scope: {
-        items: '=',
-        activeIndex: '=',
-        cssClass:'@'
-      },
-      link: linkFn,
-      controller: controllerFn
-    };
+(function () {
+  'use strict';
 
-    function linkFn(scope, element, attrs) {
-      scope.$on('itemClick', function (inEvent, inArgs) {
-        scope.select(inArgs.item);
-      });
-    }
+  angular.module('nx.widget')
+    .directive('nxTabs', [function ($scope) {
+      return {
+        restrict: 'E',
+        transclude: true,
+        template: '<div class="ng-widget-tabs {{cssClass}}" ng-transclude></div>',
+        scope: {
+          items: '=',
+          activeIndex: '=',
+          cssClass: '@'
+        },
+        link: linkFn,
+        controller: controllerFn
+      };
 
-    function controllerFn($scope) {
-
-      $scope.select = select;
-
-      $scope.$watch('items', function (inItems) {
-        angular.forEach(inItems, function (item, index) {
-          if (item.active) {
-            $scope.index = index;
-          }
+      function linkFn(scope, element, attrs) {
+        scope.$on('itemClick', function (inEvent, inArgs) {
+          scope.select(inArgs.item);
         });
-      });
-
-      $scope.$watch('activeIndex', function (inValue) {
-        var activeItem=$scope.items[inValue];
-        select(activeItem);
-      });
-
-      function select(inItem) {
-        angular.forEach($scope.items, function (item, index) {
-          item.active = false;
-          if (angular.equals(item, inItem)) {
-            $scope.activeIndex = index;
-          }
-        });
-        inItem.active = true;
       }
-    }
 
-  }]);
+      function controllerFn($scope) {
+
+        $scope.select = select;
+
+        $scope.$watch('items', function (inItems) {
+          angular.forEach(inItems, function (item, index) {
+            if (item.active) {
+              $scope.index = index;
+            }
+          });
+        });
+
+        $scope.$watch('activeIndex', function (inValue) {
+          var activeItem = $scope.items[inValue];
+          select(activeItem);
+        });
+
+        function select(inItem) {
+          angular.forEach($scope.items, function (item, index) {
+            item.active = false;
+            if (angular.equals(item, inItem)) {
+              $scope.activeIndex = index;
+            }
+          });
+          inItem.active = true;
+        }
+      }
+
+    }]);
+
+
+})();

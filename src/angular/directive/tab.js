@@ -1,4 +1,7 @@
-angular.module('tabs')
+(function () {
+  'use strict';
+
+  angular.module('nx.widget')
   .directive('nxTab', [function () {
     return {
       restrict: 'E',
@@ -16,3 +19,5 @@ angular.module('tabs')
     }
 
   }]);
+
+})();
