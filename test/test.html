@@ -22,8 +22,8 @@
   </style>
 </head>
 <body ng-controller="MainCtrl">
-<nx-tabs items="items">
-  <nx-tab ng-repeat="item in items" active="item.active">{{item.title}}</nx-tab>
+<nx-tabs items="items" active-index="activeIndex">
+  <nx-tab ng-repeat="item in items">{{item.title}}</nx-tab>
 </nx-tabs>
 
 <script type="text/javascript" src="../bower_components/angular/angular.js"></script>
@@ -31,6 +31,7 @@
 <script type="text/javascript">
   var TestModule = angular.module('TestApp', ['tabs'])
     .controller('MainCtrl', function ($scope) {
+      $scope.activeIndex = 2;
       $scope.items = [
         {
           title: 'Tab1',
@@ -45,6 +46,8 @@
           active: false
         }
       ];
+
+
     });
 </script>
 </body>

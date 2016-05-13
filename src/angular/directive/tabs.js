@@ -1,5 +1,5 @@
 angular.module('tabs')
-  .directive('nxTabs', ['$scope',function ($scope) {
+  .directive('nxTabs', [function ($scope) {
     return {
       restrict: 'E',
       transclude: true,
@@ -12,35 +12,38 @@ angular.module('tabs')
       controller: controllerFn
     };
 
-    function linkFn(scope, element) {
+    function linkFn(scope, element, attrs) {
       scope.$on('itemClick', function (inEvent, inArgs) {
-        $scope.select(inArgs.item);
+        scope.select(inArgs.item);
       });
     }
 
-
-    function controllerFn() {
+    function controllerFn($scope) {
 
       $scope.select = select;
 
-
-    }
-
-
-    function select(inItem) {
-      angular.forEach($scope.items, function (item, index) {
-        item.active = false;
+      $scope.$watch('items', function (inItems) {
+        angular.forEach(inItems, function (item, index) {
+          if (item.active) {
+            $scope.index = index;
+          }
+        });
       });
-      inItem.active = true;
 
-      $scope.$apply();
-    }
+      $scope.$watch('activeIndex', function (inValue) {
+        var activeItem=$scope.items[inValue];
+        select(activeItem);
+      });
 
-    function setActiveIndex(inIndex) {
-
-    }
-
-    function getActiveIndex() {
+      function select(inItem) {
+        angular.forEach($scope.items, function (item, index) {
+          item.active = false;
+          if (angular.equals(item, inItem)) {
+            $scope.activeIndex = index;
+          }
+        });
+        inItem.active = true;
+      }
     }
 
   }]);

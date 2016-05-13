@@ -12,6 +12,7 @@ angular.module('tabs')
     function linkFn(scope, element, attrs) {
       element.bind('click', function () {
         scope.$emit('itemClick', scope);
+        scope.$apply();
       })
     }
 
