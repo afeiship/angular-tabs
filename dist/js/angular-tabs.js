@@ -44,10 +44,11 @@ angular.module('tabs')
     return {
       restrict: 'E',
       transclude: true,
-      template: '<div class="ng-widget-tabs" ng-transclude></div>',
+      template: '<div class="ng-widget-tabs {{cssClass}}" ng-transclude></div>',
       scope: {
         items: '=',
-        activeIndex: '='
+        activeIndex: '=',
+        cssClass:'@'
       },
       link: linkFn,
       controller: controllerFn
