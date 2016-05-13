@@ -3,9 +3,16 @@ angular.module('tabs')
     return {
       restrict: 'E',
       transclude: true,
-      template: '<div class="ng-widget-tab" data-active="{{active}}" ng-transclude></div>',
-      scope: {
-        active: '='
-      }
+      //require: '?^TabController',
+      template: '<div class="ng-widget-tab" data-active="{{item.active}}" ng-transclude></div>',
+      link: linkFn
     };
+
+
+    function linkFn(scope, element, attrs) {
+      element.bind('click', function () {
+        scope.$emit('itemClick', scope);
+      })
+    }
+
   }]);

@@ -22,20 +22,15 @@
   </style>
 </head>
 <body ng-controller="MainCtrl">
-<button style="width:100%;background: #eee;padding:20px;" ng-click="show()">Show Toast</button>
-
-<nx-tabs items="items" item-template="itemTemplate()">
+<nx-tabs items="items">
+  <nx-tab ng-repeat="item in items" active="item.active">{{item.title}}</nx-tab>
 </nx-tabs>
 
 <script type="text/javascript" src="../bower_components/angular/angular.js"></script>
 <script type="text/javascript" src="../dist/js/angular-tabs.js"></script>
 <script type="text/javascript">
   var TestModule = angular.module('TestApp', ['tabs'])
-    .controller('MainCtrl', function ($scope,$compile) {
-      $scope.itemTemplate = function () {
-        var templateElement = angular.element('<div>{{item.title}}</div>');
-        return $compile(templateElement)($scope);
-      };
+    .controller('MainCtrl', function ($scope) {
       $scope.items = [
         {
           title: 'Tab1',

@@ -1,33 +1,46 @@
 angular.module('tabs')
-  .directive('nxTabs', [function () {
+  .directive('nxTabs', ['$scope',function ($scope) {
     return {
       restrict: 'E',
-      template: '<div class="ng-widget-tabs">' +
-      '<nx-tab ng-click="select(item)" active="item.active" ng-repeat="item in items">{{itemTemplate()}}</nx-tab>' +
-      '</div>',
+      transclude: true,
+      template: '<div class="ng-widget-tabs" ng-transclude></div>',
       scope: {
         items: '=',
-        itemTemplate: '&'
+        activeIndex: '='
       },
+      link: linkFn,
       controller: controllerFn
     };
-    function controllerFn($scope, $compile) {
-      //var items = $scope.items || [];
-      console.log($scope);
+
+    function linkFn(scope, element) {
+      scope.$on('itemClick', function (inEvent, inArgs) {
+        $scope.select(inArgs.item);
+      });
+    }
+
+
+    function controllerFn() {
+
       $scope.select = select;
-      /*$scope.itemTemplate = function () {
-        var templateElement = angular.element('<div>{{item.title}}</div>');
-        return $compile(templateElement)($scope);
-      };*/
 
 
-      function select(inItem) {
-        angular.forEach($scope.items, function (item, key) {
-          item.active = false;
-        });
-        inItem.active = true;
-      }
+    }
 
+
+    function select(inItem) {
+      angular.forEach($scope.items, function (item, index) {
+        item.active = false;
+      });
+      inItem.active = true;
+
+      $scope.$apply();
+    }
+
+    function setActiveIndex(inIndex) {
+
+    }
+
+    function getActiveIndex() {
     }
 
   }]);
