@@ -1,7 +1,7 @@
 {
   "name": "angular-tabs",
   "version": "1.0.0",
-  "description": "Tabs component based on angular &amp; sass.",
+  "description": "Tabs directive based on angular & sass.",
   "homepage": "https://github.com/afeiship/angular-tabs",
   "author": {
     "name": "afei",
