@@ -3,7 +3,6 @@ angular.module('tabs')
     return {
       restrict: 'E',
       transclude: true,
-      //require: '?^TabController',
       template: '<div class="ng-widget-tab" data-active="{{item.active}}" ng-transclude></div>',
       link: linkFn
     };
