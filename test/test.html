@@ -46,19 +46,19 @@
   </style>
 </head>
 <body ng-controller="MainCtrl" ng-cloak>
-<nx-tabs items="items" active-index="activeIndex" css-class="header">
-  <nx-tab ng-repeat="item in items">{{item.title}}</nx-tab>
+<nx-tabs>
+  <nx-tab title="First Tab">
+    <div>This is the content of the first tab.</div>
+  </nx-tab>
+  <nx-tab title="Second Tab">
+    <div>This is the content of the second tab.</div>
+  </nx-tab>
 </nx-tabs>
-
-<nx-tabs items="items1" active-index="activeIndex" css-class="body">
-  <nx-tab ng-repeat="item in items1">qeqwewq{{item.content}}</nx-tab>
-</nx-tabs>
-
 
 <script type="text/javascript" src="../bower_components/angular/angular.js"></script>
 <script type="text/javascript" src="../dist/js/angular-tabs.js"></script>
 <script type="text/javascript">
-  var TestModule = angular.module('TestApp', ['tabs'])
+  var TestModule = angular.module('TestApp', ['nx.widget'])
     .controller('MainCtrl', function ($scope) {
       $scope.activeIndex = 2;
       $scope.items = [

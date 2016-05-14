@@ -27,7 +27,6 @@ var config = {
 
 var scripts = [
   './src/angular/main.js',
-  './src/angular/controller/tab.controller.js',
   './src/angular/directive/tab.js',
   './src/angular/directive/tabs.js'
 ];

@@ -2,22 +2,21 @@
   'use strict';
 
   angular.module('nx.widget')
-  .directive('nxTab', [function () {
-    return {
-      restrict: 'E',
-      transclude: true,
-      template: '<div class="ng-widget-tab" data-active="{{item.active}}" ng-transclude></div>',
-      link: linkFn
-    };
+    .directive('nxTab', [function () {
+      return {
+        require: '^nxTabs',
+        restrict: 'E',
+        transclude: true,
+        scope: {
+          title: '@'
+        },
+        link: function (scope, element, attrs, tabsCtrl) {
+          tabsCtrl.addPane(scope);
+        },
+        template: '<div class="tab-bd-item" data-active="{{selected}}" ng-transclude></div>',
+        replace: true
+      };
 
-
-    function linkFn(scope, element, attrs) {
-      element.bind('click', function () {
-        scope.$emit('itemClick', scope);
-        scope.$apply();
-      })
-    }
-
-  }]);
+    }]);
 
 })();

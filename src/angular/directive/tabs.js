@@ -6,49 +6,36 @@
       return {
         restrict: 'E',
         transclude: true,
-        template: '<div class="ng-widget-tabs {{cssClass}}" ng-transclude></div>',
         scope: {
-          items: '=',
-          activeIndex: '=',
           cssClass: '@'
         },
-        link: linkFn,
-        controller: controllerFn
+        controller: ["$scope", function ($scope) {
+          var items = $scope.items = [];
+
+          $scope.select = function (item) {
+            angular.forEach(items, function (item) {
+              item.selected = false;
+            });
+            item.selected = true;
+          };
+
+          this.addPane = function (pane) {
+            if (items.length == 0) {
+              $scope.select(pane);
+            }
+            items.push(pane);
+          };
+        }],
+        template: '<div class="ng-widget-tabs {{cssClass}}">' +
+        '<ul class="tab-hd">' +
+        '<li class="tab-hd-item" ng-repeat="item in items" data-active="{{item.selected}}">' +
+        '<a href="javascript:;" ng-click="select(item)">{{item.title}}</a>' +
+        '</li>' +
+        '</ul>' +
+        '<div class="tab-bd" ng-transclude></div>' +
+        '</div>',
+        replace: true
       };
-
-      function linkFn(scope, element, attrs) {
-        scope.$on('itemClick', function (inEvent, inArgs) {
-          scope.select(inArgs.item);
-        });
-      }
-
-      function controllerFn($scope) {
-
-        $scope.select = select;
-
-        $scope.$watch('items', function (inItems) {
-          angular.forEach(inItems, function (item, index) {
-            if (item.active) {
-              $scope.index = index;
-            }
-          });
-        });
-
-        $scope.$watch('activeIndex', function (inValue) {
-          var activeItem = $scope.items[inValue];
-          select(activeItem);
-        });
-
-        function select(inItem) {
-          angular.forEach($scope.items, function (item, index) {
-            item.active = false;
-            if (angular.equals(item, inItem)) {
-              $scope.activeIndex = index;
-            }
-          });
-          inItem.active = true;
-        }
-      }
 
     }]);
 

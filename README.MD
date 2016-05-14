@@ -55,3 +55,8 @@ var TestModule = angular.module('TestApp', ['tabs'])
     });
 
 ```
+
+
+##resources:
++ http://jsfiddle.net/powertoolsteam/GBE7N/1/
++ http://www.cnblogs.com/powertoolsteam/p/angularjs-custom-directive.html
